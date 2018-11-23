@@ -2,21 +2,24 @@
 
 <h1>Crea una tiendita</h1>
 
+<div>{{error}}</div>
+
+
 <form action="/tienditas/new" method="POST">
 <p>
   Nombre:
-  <input type="text" name="name" id="">
+  <input type="text" name="name" value="{{tiendita.name}}">
 </p>
 <p>
   Giro Comercial:
-  <input type="text" name="" id="">
+  <input type="text" name="giro" value="{{tiendita.giro}}">
 </p>
 <p>
   Owner:
-  <input type="text" name="owner" id="">
+  <input type="text" name="owner" value="{{tiendita.owner}}">
 </p>
-<p>
+<button>
   <input type="text" value="Guardar :)">
-</p>
+</button>
 </form>
 </div>
