@@ -17,9 +17,30 @@ router.post('/new',(req,res)=>{
     res.render('tienditas/form', {tiendita:req.body,error})
   })
 })
+
+
+
+
+
 //list tienditas
+router.get('/',(req,res,next)=>{
+  Tiendita.find()
+  .then(tienditas=>{
+    res.render('tienditas/list',{tienditas})
+  }).catch(e=>{
+      next(e)
+  })
+})
+
 
 //tienditas detail
+router.get('/detail/:id',(req, res, next)=>{
+  const {id} = req.params
+  Tiendita.findById(id)
+  .then(tiendita=>{
+    res.render('tienditas/detail',tiendita)
+  }).catch(e=>next(e))
+})
 
 //Update tienditas
 
