@@ -4,7 +4,8 @@ const Tiendita = require('../models/Tiendita')//modelo de la tiendita
 
 //create tienditas
 router.get('/new',(req,res)=>{
-  res.render('tienditas/form')
+  const action = '/tienditas/new'
+  res.render('tienditas/form',{action})
 })
 
 
@@ -43,6 +44,26 @@ router.get('/detail/:id',(req, res, next)=>{
 })
 
 //Update tienditas
+router.get('/update/:id',(req,res,next)=>{
+  const {id} = req.params
+  const action = `/tienditas/update/${id}`
+
+  Tiendita.findById(id)
+    .then(tiendita=>{
+      res.render('tienditas/form', {tiendita})
+    }).catch(e=>next(e))
+})
+
+router.post('/update/:id',(req,res,next)=>{
+    const {id} = req.params
+    Tiendita.findByIdAndUpdate(id,{$set:req.body},{new:true})//nos trae lo que trae en la ruta
+      .then(tiendita=>{
+        res.redirect(`/tienditas/detail/${id}`)
+      }).catch(e=>{
+        res.render('tienditas/form',)
+      })
+  })
+
 
 //Delete tienditas
 
